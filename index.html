@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techno Paws Blog - FINAL 6.0 (Authenticated System)</title>
+    <title>Techno Paws Blog - FINAL 22.0 (Post Fix & Quiet Footer)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --clr-accent-secondary: #ff007f; /* Neon Pink */
             --clr-border: #333333;
             --transition-speed: 0.3s;       
-            --footer-height: 80px; 
+            --footer-height: 70px; 
         }
         
         body { 
@@ -33,10 +33,10 @@
                               linear-gradient(90deg, transparent 24%, var(--clr-border) 25%, var(--clr-border) 26%, transparent 27%, transparent 74%, var(--clr-border) 75%, var(--clr-border) 76%, transparent 77%, transparent);
             background-size: 50px 50px;
             overflow-x: hidden; 
-            padding-bottom: var(--footer-height); /* Space for fixed footer */
+            padding-bottom: var(--footer-height); 
         }
 
-        /* --- LOADER STYLES (Unchanged) --- */
+        /* --- LOADER STYLES --- */
         #loader-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--clr-bg-main); display: flex;
@@ -44,8 +44,9 @@
             z-index: 1000; opacity: 1; transition: opacity 1s ease-out;
         }
         .loader-text {
-            color: var(--clr-accent-primary); font-size: 2.5em; letter-spacing: 3px;
-            animation: blink 1s step-end infinite;
+            color: var(--clr-accent-primary); 
+            font-size: 2.5em; 
+            letter-spacing: 3px;
         }
         .loader-bar {
             width: 300px; height: 5px; margin-top: 20px;
@@ -55,7 +56,6 @@
             height: 100%; width: 0%; background: var(--clr-accent-primary);
             animation: load-progress 2s ease-out forwards;
         }
-        @keyframes blink { 50% { opacity: 0.5; } }
         @keyframes load-progress { 0% { width: 0%; } 100% { width: 100%; } }
 
         /* --- HEADER & NAVIGATION --- */
@@ -66,18 +66,37 @@
             background-color: #121212; 
             transition: all var(--transition-speed); 
         }
-        .site-header h1 { 
-            font-size: 3.5em; color: var(--clr-accent-primary); text-transform: uppercase; letter-spacing: 7px;
-            text-shadow: 0 0 15px var(--clr-accent-primary), 0 0 25px rgba(0, 255, 255, 0.5); 
+        
+        /* Big Glowing Logo Style */
+        .site-header h1 {
+            font-size: 3.5em; 
+            color: var(--clr-accent-primary);
+            /* Add the powerful glowing effect */
+            text-shadow: 
+                0 0 10px var(--clr-accent-primary), 
+                0 0 20px var(--clr-accent-primary), 
+                0 0 40px rgba(0, 255, 255, 0.7),
+                0 0 80px rgba(0, 255, 255, 0.5);
+            transition: all var(--transition-speed);
         }
+
         .site-header.sticky {
             position: fixed; top: 0; left: 0; width: 100%;
             padding: 15px 20px 10px 20px; z-index: 500;
             border-bottom: 1px solid var(--clr-accent-secondary);
         }
-        .site-header.sticky h1 { font-size: 1.5em; letter-spacing: 3px; }
+        
+        /* Sticky H1 override - keeps it small and removes the big glow */
+        .site-header.sticky h1 { 
+            font-size: 1.5em; 
+            letter-spacing: 3px; 
+            text-shadow: none; 
+            color: var(--clr-text-main); 
+        }
+        
         .site-header.sticky p, .site-header.sticky #siteNav { display: none; } 
         
+        .site-nav { margin-top: 20px; }
         .site-nav ul { list-style: none; display: flex; justify-content: center; }
         .site-nav li { margin: 0 20px; }
         .site-nav a { 
@@ -89,34 +108,15 @@
             color: white; border-bottom: 3px solid var(--clr-accent-secondary); 
         }
 
-        /* --- AUTHENTICATION MENU (NEW) --- */
-        .auth-menu { 
-            display: flex; justify-content: center; margin-top: 15px; 
-            gap: 20px; 
-            font-size: 1.1em;
-        }
-        .auth-menu-link {
-            color: var(--clr-accent-secondary);
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: color var(--transition-speed);
-        }
-        .auth-menu-link:hover {
-            color: white;
-            text-shadow: 0 0 8px var(--clr-accent-secondary);
-        }
-        #authStatus {
-            color: #00ff00; /* Green for logged in status */
-            font-weight: bold;
-        }
-
-
-        /* --- MAIN LAYOUT & SEARCH (Unchanged) --- */
+        /* --- MAIN LAYOUT & SEARCH --- */
         .page-content { padding: 20px; transition: opacity 0.5s; }
         .content-spacer { height: 0; transition: height var(--transition-speed); }
-        .search-container { max-width: 900px; margin: 20px auto 30px auto; text-align: right; }
+        .search-container { 
+            max-width: 900px; 
+            margin: 20px auto 30px auto; 
+            text-align: right; 
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
         #searchInput { 
             padding: 12px 18px; width: 100%; max-width: 350px; 
             background-color: #1e1e1e; border: 2px solid var(--clr-accent-primary); 
@@ -128,7 +128,7 @@
             box-shadow: 0 0 12px var(--clr-accent-secondary); 
         }
 
-        /* --- BLOG POST STYLING (Unchanged) --- */
+        /* --- BLOG POST STYLING --- */
         @keyframes fadeInSlideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -145,18 +145,23 @@
         .blog-post.visible {
             animation: fadeInSlideUp 0.6s ease-out forwards;
         }
-        .post-detail-content { font-size: 1.1em; } 
+        .blog-post:hover {
+             transform: translateY(-5px) scale(1.01);
+             box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+        }
+        /* Important: The initial post-content summary is visible, but the detail content is hidden */
+        .post-detail-content { font-size: 1.1em; display: none; } 
 
-        /* --- FOOTER & SYSTEM MONITOR (Unchanged Persistence) --- */
+        /* --- FOOTER (MINIMALIST) --- */
         .site-footer { 
             position: fixed; 
             bottom: 0; left: 0; width: 100%;
             height: var(--footer-height);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-direction: column; 
+            justify-content: center; 
             align-items: center;
-            padding: 10px 20px;
+            padding: 5px 20px; 
             border-top: 3px solid var(--clr-accent-primary); 
             font-size: 0.9em; 
             background-color: rgba(18, 18, 18, 0.95); 
@@ -165,33 +170,27 @@
             box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.15); 
         }
         
+        #primaryStatusContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
         #primaryStatus {
             font-weight: bold;
             color: var(--clr-accent-primary);
-            margin-bottom: 5px;
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center;
             text-shadow: 0 0 5px var(--clr-accent-primary);
-        }
-
-        @media (max-width: 600px) {
-            #primaryStatus {
-                font-size: 0.8em;
-                line-height: 1.2;
-            }
-            #primaryStatus br {
-                display: none; 
-            }
-            .cpu-meter {
-                width: 50px; 
-                margin-left: 5px;
-            }
+            line-height: 1; 
+            font-size: 1em;
+            flex-grow: 1; 
+            text-align: left;
         }
         
         .utility-bar {
-            display: flex; justify-content: center;
+            display: flex; 
+            justify-content: flex-end;
             color: #777777; 
         }
         .utility-link {
@@ -200,72 +199,29 @@
         }
         .utility-link:hover { color: var(--clr-accent-secondary); }
 
-        /* CPU Meter Styling */
-        .cpu-meter {
-            display: inline-block; width: 100px; height: 10px; background: #222;
-            border: 1px solid var(--clr-accent-primary); margin-left: 10px; vertical-align: middle;
-        }
-        .cpu-load {
-            height: 100%;
-            background: linear-gradient(to right, #00ff00, #ffff00, #ff0000); 
-            transition: width 0.5s ease-out;
+        .copyright-text {
+            color: #555555; 
+            font-size: 0.8em;
+            margin-top: 3px;
+            text-align: center;
         }
 
-        /* Hidden Log Console */
-        #log-console {
-            position: fixed; 
-            bottom: var(--footer-height); 
-            left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 900px;
-            margin: 0 auto;
-            background-color: #000000;
-            border: 1px solid var(--clr-accent-primary);
-            padding: 10px;
-            font-family: monospace;
-            font-size: 0.85em;
-            color: #00ff00; 
-            max-height: 200px;
-            overflow-y: scroll;
-            display: none; 
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            z-index: 999; 
-        }
-        .log-entry { margin-bottom: 5px; }
-
-        /* --- MODAL STYLES (NEW) --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 1002;
-            display: none; justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background-color: #121212; border: 3px solid var(--clr-accent-secondary);
-            padding: 40px; width: 90%; max-width: 400px;
-            border-radius: 5px; box-shadow: 0 0 30px rgba(255, 0, 127, 0.5);
-            animation: fadeInSlideUp 0.4s ease-out forwards;
-        }
-        .modal-content h2 {
-            color: var(--clr-accent-primary); text-align: center; margin-bottom: 20px;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-        .modal-content input {
-            width: 100%; padding: 10px; margin-bottom: 15px;
-            background-color: #0a0a0a; border: 1px solid var(--clr-border);
-            color: var(--clr-text-main); font-size: 1em;
-        }
-        .modal-content button {
-            width: 100%; padding: 10px; border: none;
-            background-color: var(--clr-accent-secondary); color: var(--clr-bg-main);
-            font-weight: bold; cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-        }
-        .modal-content button:hover {
-            background-color: var(--clr-accent-primary);
-            transform: translateY(-2px);
-        }
-        .modal-close {
-            position: absolute; top: 10px; right: 15px; color: var(--clr-accent-secondary);
-            font-size: 1.5em; cursor: pointer; 
+        /* Tooltip Styles (Only for Contact now) */
+        .utility-link[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background-color: #000;
+            border: 1px solid var(--clr-accent-secondary);
+            color: white;
+            font-size: 0.7em;
+            white-space: nowrap;
+            z-index: 1001;
+            margin-bottom: 5px;
+            pointer-events: none;
         }
 
     </style>
@@ -279,40 +235,13 @@
         </div>
     </div>
 
-    <div id="loginModal" class="modal-overlay" onclick="if(event.target.id === 'loginModal') closeModal('login')">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('login')">&times;</span>
-            <h2>// USER AUTHENTICATION //</h2>
-            <form onsubmit="handleLogin(event)">
-                <input type="text" id="loginUsername" placeholder="Username (e.g., CatLover)" required>
-                <input type="password" id="loginPassword" placeholder="Password (any)" required>
-                <button type="submit">LOGIN &gt;</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="signupModal" class="modal-overlay" onclick="if(event.target.id === 'signupModal') closeModal('signup')">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('signup')">&times;</span>
-            <h2>// NEW USER REGISTRATION //</h2>
-            <form onsubmit="handleSignup(event)">
-                <input type="text" id="signupUsername" placeholder="Choose Username" required>
-                <input type="password" id="signupPassword" placeholder="Choose Password (4+ chars)" required minlength="4">
-                <button type="submit">REGISTER &gt;</button>
-            </form>
-        </div>
-    </div>
-
     <div class="page-content" id="pageContent" style="opacity: 0;">
 
         <header class="site-header" id="siteHeader">
             <h1>// TECHNO PAWS //</h1>
             <p>Exploring the future of furry friends in a digital world.</p>
             
-            <div id="authContainer">
-                </div>
-            
-            <nav class="site-nav" id="siteNav" style="display: none;">
+            <nav class="site-nav" id="siteNav">
                 <ul>
                     <li><a role="button" onclick="filterCategory('all', this)" class="active">All Posts</a></li>
                     <li><a role="button" onclick="filterCategory('Canine AI', this)">Canine AI</a></li>
@@ -332,13 +261,13 @@
 
         <main class="blog-container post-view" id="blogPosts">
             
-            <article class="blog-post" id="post-1" data-category="Feline Tech" tabindex="0">
-                <a role="link" onclick="showPostDetail('post-1'); return false;" class="post-link"> 
+            <article class="blog-post" id="post-1" data-category="Feline Tech" tabindex="0" onclick="showPostDetail('post-1');">
+                <a role="link" class="post-link"> 
                     <h2 class="post-title">// Cat-alyst: When Feline Meets Fiber Optic 🌐</h2>
                     <p class="post-meta">Posted on October 12, 2025 | Category: Feline Tech</p>
                     <div class="post-content">
                         <p>Did you know that domestic cats have the potential to be the perfect data-transfer companions? Their quick reflexes and low-power consumption make them ideal for navigating complex server rooms... **CLICK FOR FULL REPORT**</p>
-                        <div class="post-detail-content" style="display: none;">
+                        <div class="post-detail-content"> 
                             <p>*** EXTENDED REPORT ACCESS GRANTED ***</p>
                             <p>Further analysis of the cat purr sine wave reveals a fascinating correlation with uncompressed video data streams, particularly those involving laser pointers. We theorize that a future cat-based network could achieve speeds of up to 1 petabyte per purr, provided ambient room temperature remains at optimal napping levels (25°C).</p>
                             <p>The primary restriction is the "Feline Attention Span," which drops the network connection after 3.7 seconds unless immediate positive reinforcement (treats) is administered. This requires a dedicated AI to manage treat distribution, adding complexity to the server architecture.</p>
@@ -347,13 +276,13 @@
                 </a>
             </article>
             
-            <article class="blog-post" id="post-2" data-category="Canine AI" tabindex="0">
-                <a role="link" onclick="showPostDetail('post-2'); return false;" class="post-link">
+            <article class="blog-post" id="post-2" data-category="Canine AI" tabindex="0" onclick="showPostDetail('post-2');">
+                <a role="link" class="post-link">
                     <h2 class="post-title">// The Algorithm Hound: Training AI with Puppy Pics 🐕</h2>
                     <p class="post-meta">Posted on September 28, 2025 | Category: Canine AI</p>
                     <div class="post-content">
                         <p>Our latest research shows that the most efficient way to train a visual recognition AI is by feeding it thousands of pictures of golden retriever puppies. The sheer volume of 'cuteness' acts as a positive feedback loop, drastically improving model accuracy... **CLICK FOR FULL REPORT**</p>
-                        <div class="post-detail-content" style="display: none;">
+                        <div class="post-detail-content">
                              <p>*** EXTENDED REPORT ACCESS GRANTED ***</p>
                              <p>The "Good Boy Protocol" is defined by a deep learning algorithm trained exclusively on images tagged with positive emotional keywords. Initial testing shows the AI is now 99.8% accurate in identifying a tennis ball and 100% accurate in demanding belly rubs after a successful data analysis run.</p>
                              <p>The biggest challenge remains power consumption due to tail-wagging being a massive thermal load. Scientists are currently developing a passive cooling system utilizing dog snores for efficient heat dissipation.</p>
@@ -362,13 +291,13 @@
                 </a>
             </article>
             
-            <article class="blog-post" id="post-3" data-category="General" tabindex="0">
-                <a role="link" onclick="showPostDetail('post-3'); return false;" class="post-link">
+            <article class="blog-post" id="post-3" data-category="General" tabindex="0" onclick="showPostDetail('post-3');">
+                <a role="link" class="post-link">
                     <h2 class="post-title">// Holographic Hamsters: The New Virtual Pet 🐹</h2>
                     <p class="post-meta">Posted on August 15, 2025 | Category: General</p>
                     <div class="post-content">
                         <p>Why deal with bedding and wheels when you can have a virtual pet that lives entirely on your coffee table? We tested the newest AR holographic hamsters for emotional attachment and battery life... **CLICK FOR FULL REPORT**</p>
-                        <div class="post-detail-content" style="display: none;">
+                        <div class="post-detail-content">
                              <p>*** EXTENDED REPORT ACCESS GRANTED ***</p>
                              <p>The AR Hamster project achieved a stunning 95% user satisfaction rate. However, the simulation often glitches when exposed to direct sunlight or actual cat movement, resulting in a 'Hamster Error 404: Not Found' message. Future updates will include a 'Panic Protocol' allowing the hamster to retreat into a digital burrow.</p>
                         </div>
@@ -379,196 +308,73 @@
 
         </main>
 
-        <div id="log-console">
-            <div class="log-entry">[ 00:00:00 ] System initialized. Establishing connection to Canine-AI-Net...</div>
-        </div>
-
         <footer class="site-footer" id="siteFooter">
-            <span id="primaryStatus">
-                </span>
-            <div class="utility-bar">
-                <a id="logToggleBtn" style="display:none;" role="button" href="#" class="utility-link" data-tooltip="System Logs (Hotkey: L)" onclick="toggleLogConsole(this); return false;">[ Log ]</a>
-                <a role="button" href="#" class="utility-link" data-tooltip="Establish Matrix Connect" onclick="executeUtility('contact', this); return false;">[ Contact ]</a>
-                <a role="button" href="#" class="utility-link" data-tooltip="Access Data Policy" onclick="executeUtility('policy', this); return false;">[ Policy ]</a>
+            
+            <div id="primaryStatusContainer">
+                 <span id="primaryStatus">
+                    </span>
+                <div class="utility-bar">
+                    <a role="button" href="#" class="utility-link" data-tooltip="Establish Matrix Connect" onclick="executeUtility('contact', this); return false;">[ Contact ]</a>
+                </div>
             </div>
-            <p style="color: #555555; margin-top: 5px;">&copy; 2025 Techno Paws. Status: **Online**.</p>
+            
+            <p class="copyright-text">
+                © 2025 MrTekPet2013 (Ayden Kharoti). All rights reserved.
+            </p>
         </footer>
     </div>
 
     <script>
         // Global element references
         const header = document.getElementById('siteHeader');
-        const navigation = document.getElementById('siteNav');
-        const authContainer = document.getElementById('authContainer');
         const search = document.getElementById('searchContainer');
         const postsContainer = document.getElementById('blogPosts');
         const loader = document.getElementById('loader-overlay');
         const pageContent = document.getElementById('pageContent');
         const spacer = document.getElementById('contentSpacer'); 
-        const logConsole = document.getElementById('log-console');
         const primaryStatus = document.getElementById('primaryStatus');
-        const logToggleBtn = document.getElementById('logToggleBtn');
+        const searchInput = document.getElementById('searchInput');
         
         // Dynamic variables
-        let logEntryCount = 0;
-        let currentCpuLoad = 5;
-        let cpuLoadTimeout = null;
-        const initialStatusText = 'IDLE: Awaiting user input';
+        const initialStatusText = ''; // Silent when idle
         let currentStatusText = initialStatusText;
-        let cpuLoadBar = null; 
+        let initialHeaderHeight = 0; 
+        let startTime = Date.now(); 
 
-        // --- AUTHENTICATION FUNCTIONS (NEW) ---
 
-        /**
-         * Checks local storage for an active session and updates the UI.
-         */
-        function checkAuthentication() {
-            const username = localStorage.getItem('currentUser');
-            if (username) {
-                logEvent(`User session found: ${username}. Logging in.`, 'SUCCESS');
-                showLoggedInState(username);
-            } else {
-                logEvent('No active user session detected.', 'SYSTEM');
-                showLoggedOutState();
-            }
-        }
-
-        /**
-         * Renders the logged-in state UI.
-         */
-        function showLoggedInState(username) {
-            authContainer.innerHTML = `
-                <div class="auth-menu">
-                    <span id="authStatus">// WELCOME, ${username.toUpperCase()} //</span>
-                    <a role="button" class="auth-menu-link" onclick="handleLogout(); return false;">[ Log Out ]</a>
-                </div>
-            `;
-            navigation.style.display = 'flex'; // Show main navigation
-            logToggleBtn.style.display = ''; // Show Log button (protected feature)
-        }
-
-        /**
-         * Renders the logged-out state UI.
-         */
-        function showLoggedOutState() {
-            authContainer.innerHTML = `
-                <div class="auth-menu">
-                    <a role="button" class="auth-menu-link" onclick="openModal('login'); return false;">[ Log In ]</a>
-                    <a role="button" class="auth-menu-link" onclick="openModal('signup'); return false;">[ Sign Up ]</a>
-                </div>
-            `;
-            navigation.style.display = 'none'; // Hide main navigation
-            logToggleBtn.style.display = 'none'; // Hide Log button
-            logConsole.style.display = 'none'; // Hide Log Console
-        }
-
-        /**
-         * Handles the login form submission.
-         */
-        function handleLogin(event) {
-            event.preventDefault();
-            adjustCpuLoad(40, 1800, 'AUTH: Validating user credentials');
-
-            const username = document.getElementById('loginUsername').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            // Simple simulated check: requires a password of at least 1 char.
-            if (username && password.length >= 1) {
-                logEvent(`Attempting User Authentication for: ${username}...`, 'ATTEMPT');
-                closeModal('login');
-
-                setTimeout(() => {
-                    localStorage.setItem('currentUser', username);
-                    logEvent(`Authentication successful. Session established for ${username}.`, 'SUCCESS');
-                    showLoggedInState(username);
-                    showAllPosts(); // Ensure correct view state after login
-                }, 1500);
-            } else {
-                logEvent('Login failed: Username or Password missing.', 'ERROR');
-            }
-        }
-
-        /**
-         * Handles the sign-up form submission.
-         */
-        function handleSignup(event) {
-            event.preventDefault();
-            adjustCpuLoad(50, 2000, 'AUTH: Processing new user registration');
-
-            const username = document.getElementById('signupUsername').value.trim();
-            const password = document.getElementById('signupPassword').value;
-
-            // Simple simulated check: requires password of at least 4 chars
-            if (username && password.length >= 4) {
-                logEvent(`Registering new user: ${username}...`, 'ATTEMPT');
-                closeModal('signup');
-                
-                setTimeout(() => {
-                    // In a real app, this would save to a database. Here, it logs them in immediately.
-                    localStorage.setItem('currentUser', username);
-                    logEvent(`User ${username} successfully registered and logged in.`, 'SUCCESS');
-                    showLoggedInState(username);
-                    showAllPosts(); 
-                }, 1800);
-            } else {
-                logEvent('Registration failed: Username invalid or password too short (min 4 chars).', 'ERROR');
-            }
-        }
-
-        /**
-         * Handles the logout process.
-         */
-        function handleLogout() {
-            adjustCpuLoad(15, 800, 'AUTH: Terminating user session');
-            localStorage.removeItem('currentUser');
-            logEvent('User session terminated successfully. System state reset.', 'SYSTEM');
-            showLoggedOutState();
-            showAllPosts(); 
-        }
-
-        /**
-         * Opens the specified modal.
-         */
-        function openModal(type) {
-            const modalId = type === 'login' ? 'loginModal' : 'signupModal';
-            document.getElementById(modalId).style.display = 'flex';
-        }
-
-        /**
-         * Closes the specified modal.
-         */
-        function closeModal(type) {
-            const modalId = type === 'login' ? 'loginModal' : 'signupModal';
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // --- CORE APPLICATION FUNCTIONS (Fixed Post Expand) ---
+        // --- CORE APPLICATION FUNCTIONS (Post/Filter/Scroll) ---
 
         function showPostDetail(postId) {
             if (postsContainer.classList.contains('detail-view')) return;
 
-            logEvent(`Executing Thread: post_detail_view for ${postId}`, 'INFO');
-            adjustCpuLoad(25, 1000, `PARSING: Post-${postId}`); 
+            window.scrollTo(0, 0); 
+            // FIX: Removed the status update to keep the footer quiet
+            executeUtilitySim(1000, initialStatusText); 
 
-            // 1. Hide non-essential elements
             header.classList.remove('sticky'); 
-            header.style.display = 'none';
-            // navigation is handled by JS on login state, no need to hide here
+            
+            header.style.visibility = 'hidden'; 
             search.style.display = 'none';
             spacer.style.height = '0'; 
-            logConsole.style.display = 'none'; 
             
             postsContainer.classList.add('detail-view');
             
-            // 2. Manage post visibility and detail content
             let allPosts = document.getElementsByClassName('blog-post');
             for (let post of allPosts) {
                 post.classList.remove('visible'); 
                 if (post.id === postId) {
-                    post.style.display = ''; 
+                    // FIX: Ensure the single post is visible
+                    post.style.display = 'block'; 
                     let detailContent = post.querySelector('.post-detail-content');
+                    let summaryContent = post.querySelector('.post-content p');
+                    
                     if (detailContent) {
+                        // FIX: Show the full content
                         detailContent.style.display = 'block';
+                    }
+                    if (summaryContent) {
+                        // Hide the summary when detail is shown
+                        summaryContent.style.display = 'none';
                     }
                     
                     if (!post.querySelector('.back-link')) {
@@ -580,29 +386,30 @@
                     post.style.display = 'none'; 
                 }
             }
-            window.scrollTo(0, 0); 
         }
 
         function showAllPosts() {
-            logEvent('Executing Thread: main_index_view', 'INFO');
-            adjustCpuLoad(5, 500, 'IDLE: Awaiting user input'); 
+            window.scrollTo(0, 0); 
+            
+            executeUtilitySim(500, initialStatusText); 
 
-            // 1. Restore layout elements
-            header.style.display = '';
-            // navigation state is managed by checkAuthentication()
+            header.style.visibility = 'visible';
             search.style.display = '';
-            logConsole.style.display = 'none'; 
             
             postsContainer.classList.remove('detail-view');
 
-            // 2. Loop through all posts to reset their state
             let allPosts = document.getElementsByClassName('blog-post');
             for (let post of allPosts) {
                 post.style.display = ''; 
                 
                 let detailContent = post.querySelector('.post-detail-content');
+                let summaryContent = post.querySelector('.post-content p');
+                
                 if (detailContent) {
                     detailContent.style.display = 'none';
+                }
+                 if (summaryContent) {
+                    summaryContent.style.display = 'block';
                 }
                 
                 let backLink = post.querySelector('.back-link');
@@ -611,13 +418,13 @@
                 }
             }
             
-            // Only try to set active category if navigation is visible (i.e., logged in)
-            if (navigation.style.display !== 'none') {
-                const allPostsLink = document.querySelector('.site-nav a[onclick*="\'all\'"]');
-                if(allPostsLink) allPostsLink.classList.add('active');
+            const allPostsLink = document.querySelector('.site-nav a[onclick*="\'all\'"]');
+            if(allPostsLink) {
+                document.querySelectorAll('.site-nav a').forEach(link => link.classList.remove('active'));
+                allPostsLink.classList.add('active');
             }
-
-            window.scrollTo(0, 0);
+            
+            handleScroll(); 
             
             allPosts.forEach(post => post.classList.remove('visible'));
             setTimeout(checkPostVisibility, 50); 
@@ -626,11 +433,10 @@
         function filterPosts() {
             if (postsContainer.classList.contains('detail-view')) return; 
 
-            let input = document.getElementById('searchInput');
-            let filter = input.value.toLowerCase();
+            let filter = searchInput.value.toLowerCase();
             
-            logEvent(`Search Query: "${filter}"`, 'SYSTEM');
-            adjustCpuLoad(20, 100, `SEARCH: ${filter.substring(0, 10)}...`); 
+            // FIX: Removed the status update to keep the footer quiet
+            executeUtilitySim(100, initialStatusText); 
 
             let navLinks = document.querySelectorAll('.site-nav a');
             navLinks.forEach(link => link.classList.remove('active'));
@@ -646,7 +452,7 @@
                 
                 if (postText.includes(filter)) {
                     post.style.display = ""; 
-                    post.classList.add('visible'); 
+                    setTimeout(() => post.classList.add('visible'), 10);
                 } else {
                     post.style.display = "none"; 
                     post.classList.remove('visible'); 
@@ -657,8 +463,8 @@
         function filterCategory(category, element) {
             if (postsContainer.classList.contains('detail-view')) return; 
             
-            logEvent(`Filtering by Category: ${category}`, 'SYSTEM');
-            adjustCpuLoad(10, 500, `FILTER: ${category}`);
+            // FIX: Removed the status update to keep the footer quiet
+            executeUtilitySim(500, initialStatusText);
 
             let posts = document.getElementsByClassName('blog-post');
             
@@ -668,6 +474,10 @@
             if (element) {
                 element.classList.add('active');
             }
+            
+            for (let post of posts) {
+                post.classList.remove('visible');
+            }
 
             for (let i = 0; i < posts.length; i++) {
                 let post = posts[i];
@@ -675,50 +485,52 @@
 
                 if (category === 'all' || postCategory === category) {
                     post.style.display = ""; 
-                    post.classList.add('visible'); 
+                    setTimeout(() => checkPostVisibility(), 10);
                 } else {
                     post.style.display = "none"; 
-                    post.classList.remove('visible'); 
                 }
             }
         }
 
-        // --- FOOTER UTILITY BUTTONS (Unchanged Logic) ---
+        // --- DYNAMIC SYSTEM CLOCK & UTILITY ---
         
+        // This function now only handles temporary status for utilities like 'Contact'
+        function executeUtilitySim(duration, tempStatus) {
+            currentStatusText = tempStatus;
+            
+            setTimeout(() => {
+                currentStatusText = initialStatusText;
+            }, duration);
+        }
+
         function executeUtility(type, element) {
-            adjustCpuLoad(30, 1500, `TASK: ${type.toUpperCase()} EXECUTION`); 
+            currentStatusText = `TASK: ${type.toUpperCase()} EXECUTION`;
 
             if (type === 'contact') {
-                logEvent(`Connecting to external Matrix Node...`, 'ATTEMPT');
                 element.textContent = '[ Connecting... ]';
                 setTimeout(() => {
-                    logEvent('Connection attempt timed out. External firewall detected. Reverting.', 'ERROR');
                     element.textContent = '[ Contact ]';
+                    currentStatusText = initialStatusText;
                 }, 1500);
-            } else if (type === 'policy') {
-                logEvent(`Downloading Data Policy Protocol (DPP v3.1)...`, 'DOWNLOAD');
-                element.textContent = '[ Fetching Data... ]';
-                setTimeout(() => {
-                    logEvent('DPP Download Complete. Hash verified: 8a7c2f9d. Status: SECURE.', 'SUCCESS');
-                    element.textContent = '[ Policy ]';
-                }, 1000);
             }
         }
 
-        // --- DYNAMIC SYSTEM HEALTH (Unchanged Logic) ---
+        function formatUptime(ms) {
+            let seconds = Math.floor(ms / 1000);
+            let minutes = Math.floor(seconds / 60);
+            let hours = Math.floor(minutes / 60);
+            let days = Math.floor(hours / 24);
 
-        function adjustCpuLoad(targetLoad, duration, tempStatus = currentStatusText) {
-            if (cpuLoadTimeout) clearTimeout(cpuLoadTimeout);
-            
-            currentCpuLoad = Math.max(5, targetLoad); 
-            currentStatusText = tempStatus;
-            updateSystemClock();
-            
-            cpuLoadTimeout = setTimeout(() => {
-                currentCpuLoad = 5;
-                currentStatusText = initialStatusText;
-                updateSystemClock();
-            }, duration);
+            seconds %= 60;
+            minutes %= 60;
+            hours %= 24;
+
+            const d = days > 0 ? `${days}d ` : '';
+            const h = hours.toString().padStart(2, '0');
+            const m = minutes.toString().padStart(2, '0');
+            const s = seconds.toString().padStart(2, '0');
+
+            return `${d}${h}:${m}:${s}`;
         }
 
         function updateSystemClock() {
@@ -728,25 +540,17 @@
 
             const timeStr = now.toLocaleTimeString('en-US', timeOptions);
             const dateStr = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
+            const uptimeStr = formatUptime(Date.now() - startTime); 
             
-            const temp = 32 + Math.floor(currentCpuLoad / 10);
+            // Logic to conditionally add the status separator and text
+            const statusDisplay = currentStatusText ? ` | ${currentStatusText}` : '';
 
-            // Construct the new innerHTML for the status bar
             primaryStatus.innerHTML = `
-                <span id="sysTime">${dateStr} | ${timeStr}</span> | TEMP: <span id="sysTemp">${temp}°C</span> | CPU: 
-                <span class="cpu-meter" role="progressbar" aria-valuenow="${currentCpuLoad}" aria-valuemin="0" aria-valuemax="100">
-                    <span id="cpuLoad" class="cpu-load" style="width: ${currentCpuLoad}%"></span>
-                </span>
-                <br> <span style="color: var(--clr-accent-secondary); font-size: 0.9em; letter-spacing: 1px;">&lt; ${currentStatusText} &gt;</span>
+                <span id="sysTime">${dateStr} | ${timeStr} | UPTIME: ${uptimeStr}${statusDisplay}</span>
             `;
-            
-            // Re-map the CPU load bar element to the global variable after update
-            cpuLoadBar = document.getElementById('cpuLoad');
-            
-            setTimeout(updateSystemClock, 1000); 
         }
 
-        // --- SCROLL, LOG CONSOLE, and HOTKEYS (Unchanged Logic) ---
+        // --- SCROLL MANAGEMENT ---
 
         function checkPostVisibility() {
             if (postsContainer.classList.contains('detail-view')) return;
@@ -768,102 +572,41 @@
         function handleScroll() {
             if (postsContainer.classList.contains('detail-view')) return;
 
-            const headerHeight = header.offsetHeight;
-            if (window.scrollY > headerHeight) {
+            const scrollY = window.scrollY;
+
+            // Header sticky logic
+            if (scrollY > 20) { 
                 header.classList.add('sticky');
-                spacer.style.height = `${header.offsetHeight}px`; 
+                spacer.style.height = `${initialHeaderHeight}px`; 
+                search.style.display = 'none'; 
             } else {
                 header.classList.remove('sticky');
                 spacer.style.height = '0'; 
+                search.style.display = 'block'; 
             }
             checkPostVisibility();
         }
 
-        function logEvent(message, type = 'INFO') {
-            logEntryCount++;
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-            
-            const typeColor = {
-                'INFO': '#00ffff',
-                'SYSTEM': '#ffffff',
-                'ERROR': '#ff0000',
-                'ATTEMPT': '#ffff00',
-                'DOWNLOAD': '#ff007f',
-                'SUCCESS': '#00ff00'
-            }[type] || '#ffffff';
-
-            const newEntry = document.createElement('div');
-            newEntry.className = 'log-entry';
-            newEntry.innerHTML = `<span style="color: ${typeColor}">[ ${timeStr} | ${type.padEnd(8, ' ')} | LOG-${logEntryCount.toString().padStart(3, '0')} ]</span> ${message}`;
-            
-            logConsole.prepend(newEntry);
-            
-            while (logConsole.children.length > 20) {
-                logConsole.removeChild(logConsole.lastChild);
-            }
-            
-            logConsole.scrollTop = 0;
-        }
-
-        function toggleLogConsole(element) {
-            // Check authentication before toggling log
-            if (!localStorage.getItem('currentUser')) {
-                 logEvent('ACCESS DENIED: Must be authenticated to view system logs.', 'ERROR');
-                 return;
-            }
-
-            const isHidden = logConsole.style.display === 'none' || logConsole.style.display === '';
-            
-            if (isHidden) {
-                logConsole.style.display = 'block';
-                logEvent('Log Console Activated. Debugging Mode Engaged.', 'SYSTEM');
-                element.textContent = '[ Close Log ]';
-            } else {
-                logEvent('Log Console Deactivated. Returning to normal operations.', 'SYSTEM');
-                logConsole.style.display = 'none';
-                element.textContent = '[ Log ]';
-            }
-        }
-
-        function handleKeydown(event) {
-            if (postsContainer.classList.contains('detail-view')) {
-                if (event.key === 'Escape' || event.key === 'h' || event.key === 'H') {
-                    showAllPosts();
-                }
-                return;
-            }
-
-            if (event.key === 's' || event.key === 'S' || event.key === '/') {
-                event.preventDefault(); 
-                document.getElementById('searchInput').focus();
-                logEvent('Hotkey: Search input focused.', 'INFO');
-            }
-            
-            if (event.key === 'h' || event.key === 'H') {
-                showAllPosts();
-            }
-
-            if (event.key === 'l' || event.key === 'L') {
-                event.preventDefault();
-                const logBtn = document.querySelector('[data-tooltip="System Logs (Hotkey: L)"]');
-                if (logBtn) toggleLogConsole(logBtn);
-            }
-
-            if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
-                if (event.key !== 's' && event.key !== 'h' && event.key !== 'l' && document.activeElement.tagName !== 'INPUT') {
-                    logEvent(`Key Input Detected: [${event.key.toUpperCase()}]`, 'SYSTEM');
-                }
-            }
-        }
-
         /* --- Initialization and Event Listeners --- */
         
-        document.addEventListener('DOMContentLoaded', () => {
-            updateSystemClock(); 
-            adjustCpuLoad(5, 0); 
-            checkAuthentication(); // NEW: Check session immediately
+        function measureInitialHeaderHeight() {
+            header.style.position = 'absolute';
+            header.style.visibility = 'hidden';
+            header.style.display = 'block'; 
+            initialHeaderHeight = header.offsetHeight;
+            header.style.cssText = ''; 
+        }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            measureInitialHeaderHeight();
+            
+            // Set up the continuous clock loop
+            setInterval(updateSystemClock, 1000); 
+
+            // Initial call to ensure display is set immediately
+            updateSystemClock();
+            
+            // Loader fade out
             setTimeout(() => {
                 loader.style.opacity = 0;
                 pageContent.style.opacity = 1;
@@ -872,18 +615,14 @@
                     checkPostVisibility(); 
                 }, 1000); 
                 
-                // Set default active category only if navigation is visible (i.e., logged in)
                 const allPostsLink = document.querySelector('.site-nav a[onclick*="\'all\'"]');
-                if (allPostsLink && navigation.style.display !== 'none') {
+                if (allPostsLink) {
                     allPostsLink.classList.add('active');
                 }
-
-                logEvent('INITIALIZATION COMPLETE. System ready for user input.', 'SUCCESS');
             }, 2000); 
         });
         
         window.addEventListener('scroll', handleScroll);
-        document.addEventListener('keydown', handleKeydown);
         
     </script>
 </body>
